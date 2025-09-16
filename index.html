@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDAY GAWADE - An Explorer's Chronicle</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Base & Variables --- */
+        :root {
+            --primary-color: #f9a825;
+            --dark-color: #121212;
+            --secondary-dark: #1a1a1a;
+            --light-color: #e0e0e0;
+            --secondary-light: #888;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+
+        /* --- Typography & General Styles --- */
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        p { line-height: 1.8; color: var(--secondary-light); }
+        a { color: var(--primary-color); text-decoration: none; }
+        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+        .section { padding: 80px 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--light-color);
+        }
+        .section-title::after {
+            content: ''; display: block; width: 80px; height: 3px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand { font-size: 1.5rem; color: var(--light-color); }
+        .nav-links a { color: var(--light-color); margin: 0 1rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 4rem; }
+        .hero .typing-text { color: var(--primary-color); border-right: .15em solid var(--primary-color); }
+
+        /* --- About Section --- */
+        #about .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        #about img { width: 100%; border-radius: 50%; }
+
+        /* --- Gallery Section --- */
+        #gallery { background-color: var(--secondary-dark); }
+        #filter-buttons { text-align: center; margin-bottom: 2rem; }
+        .filter-btn {
+            background: none; border: 1px solid var(--secondary-light);
+            color: var(--secondary-light); padding: 0.5rem 1.5rem;
+            margin: 0.2rem; cursor: pointer; transition: all 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--dark-color);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            border-radius: 8px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .gallery-item img { width: 100%; display: block; }
+        .gallery-item.hide { transform: scale(0); opacity: 0; width: 0; height: 0; padding: 0; margin: 0; }
+
+        /* --- Footer --- */
+        footer { text-align: center; padding: 2rem; background-color: #000; }
+        .social-icons a { font-size: 1.5rem; color: var(--secondary-light); margin: 0 1rem; transition: color 0.3s; }
+        .social-icons a:hover { color: var(--primary-color); }
+
+        /* --- Animation on Scroll --- */
+        .reveal {
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* --- Responsive Design --- */
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            #about .about-content { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">UDAY GAWADE</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1 class="reveal">I Explore <span class="typing-text"></span></h1>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container reveal">
+                <h2 class="section-title">An Explorer's Spirit</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="D:\uday-portfolio\images\hero-background.jpg.png" alt="Uday Gawade">
+                    </div>
+                    <div class="about-text">
+                        <h3>My story is etched in the landscapes of the Himalayas.</h3>
+                        <p>As a passionate traveler and an **India Book of Records achiever**, I believe the world's greatest lessons are found on the winding roads that lead to discovery. This path has taught me more than just navigation; it has instilled a deep sense of discipline, endurance, and adaptability. Every journey is a project, every challenge a lesson in problem-solving. I'm always looking for the next adventure—the next mountain to climb, the next skill to master, and the next story to tell.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="container reveal">
+                <h2 class="section-title">Photo Chronicle</h2>
+                
+                <div id="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="pangong">Pangong</button>
+                    <button class="filter-btn" data-filter="nubra">Nubra</button>
+                    <button class="filter-btn" data-filter="kargil">Kargil</button>
+                    <button class="filter-btn" data-filter="leh">Leh</button>
+                    <button class="filter-btn" data-filter="himchal">Himachal</button>
+                    <button class="filter-btn" data-filter="Zanskar">Zanskar</button>
+                    <button class="filter-btn" data-filter="Ladakh">Ladakh</button>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item pangong"><img src="D:\uday-portfolio\images\PANGONG\IMG20250619182628.jpg" alt="Pangong Lake"></div>
+                    <div class="gallery-item nubra"><img src="D:\uday-portfolio\images\album-cover-nubra.jpg.jpg" alt="Nubra Valley"></div>
+                    <div class="gallery-item kargil"><img src="D:\uday-portfolio\images\album-cover-kargil.jpg.jpg" alt="Kargil"></div>
+                    <div class="gallery-item zanskar"><img src="D:\uday-portfolio\images\ZANSKAR\photo1.jpg.jpg" alt="Zanskar Region"></div>
+                    <div class="gallery-item leh"><img src="D:\uday-portfolio\images\album-cover-leh.jpg.jpg" alt="Leh"></div>
+                    <div class="gallery-item himchal"><img src="D:\uday-portfolio\images\album-cover-himachal.jpg.jpg" alt="Himachal"></div>
+                    <div class="gallery-item ladakh"><img src="D:\uday-portfolio\images\album-cover-ladakh.jpg.jpg" alt="Ladakh"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container reveal text-center">
+                <h2 class="section-title">Get In Touch</h2>
+                <p>Have a question or want to collaborate? Let's connect.</p>
+                <a href="mailto:uday.gawade23@pcu.edu.in" style="color:var(--dark-color); background:var(--primary-color); padding: 1rem 2rem; display: inline-block; margin-top: 1rem;">Send an Email</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/uday-gawade-36905727b/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/uday.gawade.05" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p style="color: var(--secondary-light); margin-top: 1rem;">© 2025 Uday Gawade. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- Typing Text Effect ---
+        const words = ["the Himalayas.", "the Unseen.", "My Limits."];
+        let i = 0;
+        let j = 0;
+        let currentWord = "";
+        let isDeleting = false;
+        const typingText = document.querySelector('.typing-text');
+
+        function type() {
+            currentWord = words[i];
+            if (isDeleting) {
+                typingText.textContent = currentWord.substring(0, j - 1);
+                j--;
+                if (j == 0) {
+                    isDeleting = false;
+                    i++;
+                    if (i == words.length) {
+                        i = 0;
+                    }
+                }
+            } else {
+                typingText.textContent = currentWord.substring(0, j + 1);
+                j++;
+                if (j == currentWord.length) {
+                    isDeleting = true;
+                    setTimeout(() => {}, 2000); // Wait after word is typed
+                }
+            }
+            const typeSpeed = isDeleting ? 100 : 200;
+            setTimeout(type, typeSpeed);
+        }
+        type();
+
+        // --- Animation on Scroll ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                } else {
+                    reveals[i].classList.remove("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Initial check
+
+        // --- Filterable Gallery ---
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Set active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.classList.remove('hide');
+                    } else {
+                        item.classList.add('hide');
+                    }
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>
